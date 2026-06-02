@@ -1,0 +1,1642 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>NorteAcero — Venta de Acero en Monterrey | PTR · Lámina · Vigas · Varilla</title>
+<meta name="description" content="Distribuidora de acero en Monterrey, NL. PTR, lámina galvanizada, acanalada, polines, vigas, soleras, varilla y acero estructural. Cotización por WhatsApp en menos de 2 horas."/>
+<meta name="robots" content="index,follow"/>
+<meta property="og:title" content="NorteAcero — Distribuidora de Acero en Monterrey"/>
+<meta property="og:description" content="PTR, lámina, polines, vigas, varilla y estructural. Cotización en menos de 2 horas."/>
+<meta property="og:type" content="website"/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<!-- Barlow Condensed: solo para el hero h1 -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+<style>
+/* ─────────────────────────────────────────────────────
+   TOKENS — OKLCH throughout
+───────────────────────────────────────────────────── */
+:root{
+  --bg:        oklch(1 0 0);            /* pure white — not cream */
+  --surface:   oklch(0.965 0 0);        /* near-white surface */
+  --dark-bg:   oklch(0.1 0.008 85);     /* deep dark with gold hue pull */
+  --dark-2:    oklch(0.15 0.007 85);
+  --ink:       oklch(0.13 0 0);         /* near-black body text */
+  --muted:     oklch(0.42 0 0);         /* secondary text — 6.1:1 on white ✓ */
+  --subtle:    oklch(0.65 0 0);         /* tertiary, labels */
+  --rule:      oklch(0.88 0 0);         /* light divider */
+  --rule-dark: oklch(0.22 0 0);         /* dark section divider */
+  --gold:      oklch(0.68 0.128 85);    /* brand gold — #C9A227 */
+  --gold-d:    oklch(0.56 0.11 85);
+  --wa:        oklch(0.65 0.19 142);
+  --wa-d:      oklch(0.55 0.17 142);
+
+  --fh: 'Manrope', system-ui, sans-serif;   /* toda la UI excepto hero */
+  --fb: 'Manrope', system-ui, sans-serif;   /* cuerpo de texto */
+  --hero-font: 'Barlow Condensed', system-ui, sans-serif; /* solo h1 hero */
+
+  --max: 1280px;
+  --px:  20px;
+
+  /* Z-index scale */
+  --z-sticky: 10;
+  --z-float:  30;
+  --z-modal:  50;
+}
+
+/* ─────────────────────────────────────────────────────
+   RESET
+───────────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth}
+body{
+  font-family:var(--fb);
+  background:var(--bg);
+  color:var(--ink);
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{display:block;max-width:100%;height:auto;object-fit:cover}
+a{color:inherit;text-decoration:none}
+button{font-family:var(--fb);cursor:pointer;background:none;border:none}
+.w{max-width:var(--max);margin:0 auto;padding:0 var(--px)}
+
+/* ─────────────────────────────────────────────────────
+   SCROLL PROGRESS
+───────────────────────────────────────────────────── */
+.sp{
+  position:fixed;top:0;left:0;right:0;height:2px;
+  background:var(--gold);
+  transform-origin:left;transform:scaleX(0);
+  z-index:calc(var(--z-modal) + 10);
+  pointer-events:none;
+}
+
+/* ─────────────────────────────────────────────────────
+   TYPE SCALE — Manrope (legible) + Barlow Condensed (solo hero h1)
+───────────────────────────────────────────────────── */
+h1,h2,h3{
+  font-family:var(--fh); /* Manrope */
+  font-weight:800;
+  line-height:1.1;
+  letter-spacing:-0.015em; /* Manrope no necesita tanto tracking negativo */
+  text-wrap:balance;
+}
+h1{font-size:clamp(2.4rem,5.5vw,4.5rem)} /* h1 general (no hero) */
+h2{font-size:clamp(1.7rem,3vw,2.8rem)}
+h3{font-size:clamp(1.1rem,1.8vw,1.4rem)}
+
+/* ─────────────────────────────────────────────────────
+   BUTTONS — gold is PRECIOUS (used once as primary CTA)
+───────────────────────────────────────────────────── */
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--fh);font-weight:700;
+  font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;
+  padding:13px 26px;min-height:48px;
+  border:2px solid transparent;
+  cursor:pointer;white-space:nowrap;
+  transition:background .15s,border-color .15s,color .15s,transform .12s;
+  line-height:1;
+}
+.btn:hover{transform:translateY(-1px)}
+/* Gold — used ONLY for the primary WhatsApp/cotizar action */
+.btn-gold{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+.btn-gold:hover{background:var(--gold-d);border-color:var(--gold-d)}
+/* Dark — secondary actions */
+.btn-dark{background:var(--ink);color:#fff;border-color:var(--ink)}
+.btn-dark:hover{background:var(--dark-2)}
+/* Outline ink on white */
+.btn-out{background:transparent;color:var(--ink);border-color:var(--ink)}
+.btn-out:hover{background:var(--ink);color:#fff}
+/* Outline white on dark */
+.btn-out-wh{background:transparent;color:#fff;border-color:rgba(255,255,255,.5)}
+.btn-out-wh:hover{background:rgba(255,255,255,.1);border-color:#fff}
+/* WhatsApp */
+.btn-wa{background:var(--wa);color:#fff;border-color:var(--wa)}
+.btn-wa:hover{background:var(--wa-d);border-color:var(--wa-d);box-shadow:0 4px 16px oklch(0.65 0.19 142 /.35)}
+.btn-full{width:100%;justify-content:center}
+.ico-wa{width:18px;height:18px;fill:currentColor;flex-shrink:0}
+
+/* ─────────────────────────────────────────────────────
+   NAV
+───────────────────────────────────────────────────── */
+.nav{
+  position:sticky;top:2px;z-index:var(--z-sticky);
+  background:var(--bg);
+  border-bottom:1.5px solid var(--ink);
+  height:64px;display:flex;align-items:center;
+  transition:box-shadow .2s;
+}
+.nav.scrolled{box-shadow:0 2px 20px oklch(0 0 0 /.1)}
+.nav-inner{
+  width:100%;max-width:var(--max);margin:0 auto;
+  padding:0 var(--px);
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+}
+.nav-logo{display:flex;align-items:center;flex-shrink:0}
+.nav-logo img{height:36px;width:auto}
+.nav-links{
+  display:none;align-items:center;gap:28px;list-style:none;flex:1;justify-content:center;
+}
+.nav-links a{
+  font-family:var(--fh);font-size:.72rem;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);transition:color .12s;
+}
+.nav-links a:hover{color:var(--ink)}
+.nav-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.nav-phone{
+  display:none;
+  font-family:var(--fh);font-size:.85rem;font-weight:700;
+  color:var(--ink);white-space:nowrap;
+}
+.nav-cta .btn{padding:10px 18px;min-height:40px;font-size:.7rem}
+.nav-toggle{
+  display:flex;flex-direction:column;gap:5px;
+  padding:6px;cursor:pointer;
+}
+.nav-toggle span{
+  display:block;width:22px;height:1.5px;
+  background:var(--ink);border-radius:2px;transition:.2s;
+}
+.m-nav{
+  display:none;position:fixed;top:66px;inset-inline:0;
+  background:var(--bg);border-bottom:1.5px solid var(--ink);
+  padding:var(--px) var(--px) 24px;z-index:calc(var(--z-sticky) - 1);
+  flex-direction:column;gap:0;
+}
+.m-nav.open{display:flex}
+.m-nav a{
+  padding:14px 0;
+  font-family:var(--fh);font-size:.9rem;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink);border-bottom:1px solid var(--rule);
+  transition:color .12s;
+}
+.m-nav a:hover{color:var(--gold)}
+.m-nav .btn{margin-top:16px;width:100%;justify-content:center}
+
+/* ─────────────────────────────────────────────────────
+   HERO — dark left panel + photo right
+───────────────────────────────────────────────────── */
+.hero{
+  background:var(--dark-bg);
+  display:flex;flex-direction:column;
+  position:relative;overflow:hidden;
+  min-height:60vw;
+}
+/* Hero full-bleed — imagen completa de fondo */
+.hero-bg-img{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;object-position:center center;
+  z-index:0;display:block;
+}
+/* Overlay para legibilidad del texto */
+.hero-overlay{
+  position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(
+    105deg,
+    oklch(0.08 0.006 85 / .92) 0%,
+    oklch(0.08 0.006 85 / .78) 50%,
+    oklch(0.08 0.006 85 / .30) 100%
+  );
+}
+/* Texto sobre la imagen */
+.hero-text{
+  position:relative;z-index:2;
+  padding:56px var(--px) 64px;
+  display:flex;flex-direction:column;gap:20px;
+  max-width:680px;
+  /* centrar verticalmente */
+  margin:auto 0;
+}
+.hero h1{
+  font-family:var(--hero-font); /* Barlow Condensed — solo aquí */
+  font-weight:900;
+  color:#fff;
+  font-size:clamp(2.6rem,8vw,5.5rem);
+  letter-spacing:-0.025em;
+  text-transform:uppercase;
+}
+.hero h1 strong{
+  color:var(--gold);
+  display:block;
+}
+.hero-sub{
+  font-family:var(--fb);font-size:.95rem;
+  color:oklch(1 0 0 /.68);
+  line-height:1.65;max-width:52ch;text-wrap:pretty;
+}
+.hero-actions{display:flex;flex-direction:column;gap:10px}
+/* Trust line — not a grid of cards, just a line of text */
+/* Párrafo explicativo + mini facts */
+.hero-extra{
+  font-family:var(--fb);
+  font-size:.88rem;
+  color:oklch(1 0 0 /.62);
+  line-height:1.72;
+  max-width:52ch;
+  text-wrap:pretty;
+}
+.hero-facts{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px 24px;
+}
+.hf{
+  display:flex;align-items:center;gap:8px;
+  font-family:var(--fb);font-size:.76rem;font-weight:600;
+  color:oklch(1 0 0 /.72);letter-spacing:.01em;
+}
+.hf-dot{width:5px;height:5px;background:var(--gold);border-radius:50%;flex-shrink:0}
+
+/* Solo visible en desktop — oculto en celular */
+@media(max-width:899px){
+  .hero-extra{display:none}
+  .hero-facts{display:none}
+}
+/* Desktop: facts en 4 columnas */
+@media(min-width:900px){
+  .hero-facts{grid-template-columns:repeat(4,auto);gap:8px 32px}
+}
+
+.hero-trust{
+  font-family:var(--fh);font-size:.68rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:oklch(1 0 0 /.38);
+  padding-top:8px;
+  border-top:1px solid oklch(1 0 0 /.12);
+}
+
+/* ─────────────────────────────────────────────────────
+   DIVIDERS — structural, not decorative
+───────────────────────────────────────────────────── */
+.rule-heavy{
+  height:0;
+  border-top:3px solid var(--ink);
+}
+.rule-light{
+  height:0;
+  border-top:1px solid var(--rule);
+}
+
+/* ─────────────────────────────────────────────────────
+   CATALOG — 3-col grid, hover reveals image
+───────────────────────────────────────────────────── */
+.catalog{padding:72px 0;background:var(--bg)}
+
+.cat-header{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  flex-wrap:wrap;gap:16px;margin-bottom:40px;
+}
+.cat-header h2{color:var(--ink)}
+.cat-header p{font-size:.88rem;color:var(--muted);max-width:44ch}
+
+.prod-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:1px;background:var(--rule);
+  border:1px solid var(--rule);
+}
+
+.pc{
+  background:var(--bg);
+  display:flex;flex-direction:column;
+  cursor:pointer;
+  transition:background .14s;
+  position:relative;overflow:hidden;
+}
+.pc:hover{background:var(--surface)}
+/* Gold top bar on hover — structural, not decoration */
+.pc::before{
+  content:'';
+  position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--gold);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .22s ease-out;
+}
+.pc:hover::before{transform:scaleX(1)}
+
+.pc-img{
+  height:120px;position:relative;overflow:hidden;flex-shrink:0;
+}
+.pc-img img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+}
+/* Material textures — same as before, they communicate the material */
+.pi-ptr{background:#58606a;background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.07) 0,rgba(255,255,255,.07) 1px,transparent 1px,transparent 20px),repeating-linear-gradient(90deg,rgba(255,255,255,.07) 0,rgba(255,255,255,.07) 1px,transparent 1px,transparent 20px)}
+.pi-galv{background:#aaafb3;background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.2) 0,rgba(255,255,255,.2) 4px,transparent 4px,transparent 14px)}
+.pi-acan{background:#9ea6ac;background-image:repeating-linear-gradient(90deg,rgba(0,0,0,.1) 0,rgba(0,0,0,.1) 6px,rgba(255,255,255,.15) 6px,rgba(255,255,255,.15) 8px,rgba(0,0,0,.08) 8px,rgba(0,0,0,.08) 14px,transparent 14px,transparent 28px)}
+.pi-pol{background:#687078;background-image:repeating-linear-gradient(180deg,rgba(255,255,255,.1) 0,rgba(255,255,255,.1) 2px,transparent 2px,transparent 8px,rgba(255,255,255,.05) 8px,rgba(255,255,255,.05) 10px,transparent 10px,transparent 36px)}
+.pi-viga{background:#3a4248;background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.06) 0,rgba(255,255,255,.06) 1px,transparent 1px,transparent 32px),repeating-linear-gradient(0deg,rgba(255,255,255,.1) 0,rgba(255,255,255,.1) 3px,transparent 3px,transparent 60px)}
+.pi-sol{background:#78808a;background-image:repeating-linear-gradient(-45deg,rgba(255,255,255,.09) 0,rgba(255,255,255,.09) 2px,transparent 2px,transparent 12px)}
+.pi-var{background:#464c52;background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.14) 0,rgba(255,255,255,.14) 3px,transparent 3px,transparent 8px)}
+.pi-est{background:#30363c;background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.06) 0,rgba(255,255,255,.06) 1px,transparent 1px,transparent 28px),repeating-linear-gradient(0deg,rgba(255,255,255,.1) 0,rgba(255,255,255,.1) 3px,transparent 3px,transparent 50px)}
+.pi-pla{background:#545a60;background-image:radial-gradient(rgba(255,255,255,.1) 1px,transparent 1px);background-size:9px 9px}
+
+.pc-badge{
+  position:absolute;top:8px;left:8px;z-index:2;
+  font-family:var(--fh);font-size:.55rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,255,255,.9);background:rgba(0,0,0,.55);
+  padding:3px 8px;border-radius:1px;
+}
+
+.pc-body{padding:14px;display:flex;flex-direction:column;gap:6px;flex:1}
+.pc-name{
+  font-family:var(--fh);font-weight:800;
+  font-size:1rem;color:var(--ink);line-height:1.2;
+}
+.pc-specs{
+  /* Medidas legibles: sin uppercase (las fracciones ½" ¾" se ven mal en caps) */
+  font-family:var(--fb);
+  font-size:.8rem;font-weight:600;
+  color:var(--ink); /* más oscuro = más legible */
+  letter-spacing:.01em;
+  line-height:1.45;
+  font-variant-numeric:tabular-nums; /* números alineados */
+}
+.pc-desc{
+  font-size:.8rem;color:var(--muted);
+  line-height:1.55;display:none;
+  margin-top:2px;
+}
+.pc-cta{margin-top:auto;padding-top:10px}
+.pc-cta .btn{font-size:.66rem;padding:9px 14px;min-height:36px;width:100%;justify-content:center}
+
+.cat-foot{
+  margin-top:28px;padding-top:24px;
+  border-top:1px solid var(--rule);
+  display:flex;flex-wrap:wrap;align-items:center;
+  justify-content:space-between;gap:12px;
+}
+.cat-foot p{font-size:.88rem;color:var(--muted)}
+
+/* Catalog hover preview (ProjectShowcase effect) */
+#catPreview{
+  position:fixed;width:280px;height:175px;
+  border-radius:4px;overflow:hidden;
+  pointer-events:none;z-index:var(--z-modal);
+  top:0;left:0;
+  opacity:0;
+  transform:translate3d(-600px,-600px,0);
+  transition:opacity .25s cubic-bezier(.4,0,.2,1);
+  will-change:transform,opacity;
+  background:var(--dark-2);
+  box-shadow:0 16px 48px oklch(0 0 0 /.35),0 0 0 1.5px oklch(0.68 0.128 85 /.3);
+}
+#catPreview.active{opacity:1}
+#catPreviewInner{position:absolute;inset:0}
+#catPreviewInner img{width:100%;height:100%;object-fit:cover;display:block}
+#catPreviewOverlay{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:10px 12px;z-index:2;
+  background:linear-gradient(to top,oklch(0 0 0 /.7),transparent);
+}
+.cpn{font-family:var(--fh);font-weight:800;font-size:.78rem;color:#fff;letter-spacing:.02em;display:block;line-height:1.2}
+.cps{font-family:var(--fh);font-weight:700;font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:oklch(0.68 0.128 85 /.9);display:block;margin-top:4px}
+@media(max-width:900px){#catPreview{display:none !important}}
+
+/* ─────────────────────────────────────────────────────
+   WHY — editorial statements, not cards
+───────────────────────────────────────────────────── */
+.why{padding:72px 0;background:var(--dark-bg)}
+.why-inner{
+  display:grid;grid-template-columns:1fr;gap:0;
+  border-top:1px solid var(--rule-dark);
+}
+.why-stat{
+  display:flex;align-items:baseline;gap:20px;
+  padding:28px 0;
+  border-bottom:1px solid var(--rule-dark);
+  transition:padding .15s;
+}
+.why-stat:hover .ws-n{color:var(--gold)}
+.ws-n{
+  font-family:var(--fh);font-weight:900;
+  font-size:clamp(2.2rem,4vw,3.5rem);
+  color:oklch(1 0 0 /.25);
+  letter-spacing:-.025em;line-height:1;
+  flex-shrink:0;min-width:140px;
+  transition:color .2s;
+}
+.ws-text h3{
+  font-family:var(--fh);font-weight:700;
+  font-size:clamp(.95rem,1.8vw,1.2rem);
+  color:#fff;margin-bottom:6px;
+  letter-spacing:.01em;
+}
+.ws-text p{
+  font-family:var(--fb);font-size:.82rem;
+  color:oklch(1 0 0 /.5);line-height:1.65;
+  max-width:48ch;text-wrap:pretty;
+}
+
+/* ─────────────────────────────────────────────────────
+   PROCESS — structural numbers, not decorative
+───────────────────────────────────────────────────── */
+.process{padding:56px 0;background:var(--bg)}
+.process h2{color:var(--ink);margin-bottom:32px}
+
+/* Mobile: pasos apilados, compactos */
+.proc-steps{
+  display:flex;flex-direction:column;
+  border-top:1px solid var(--rule);
+}
+.ps{
+  display:flex;align-items:flex-start;gap:16px;
+  padding:20px 0;
+  border-bottom:1px solid var(--rule);
+}
+.ps:last-child{border-bottom:none}
+/* Número: pequeño y discreto en móvil */
+.ps-n{
+  font-family:var(--fh);font-weight:900;
+  font-size:1.8rem;
+  -webkit-text-stroke:1px var(--rule);
+  color:transparent;
+  letter-spacing:-.04em;line-height:1;
+  flex-shrink:0;min-width:40px;
+}
+.ps h3{
+  font-family:var(--fh);font-weight:700;
+  font-size:.9rem;color:var(--ink);
+  text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px;
+}
+.ps p{font-size:.8rem;color:var(--muted);line-height:1.6;max-width:36ch;text-wrap:pretty}
+
+.proc-cta{
+  margin-top:28px;
+  background:var(--ink);padding:28px 24px;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:16px;
+}
+.proc-cta h3{
+  font-family:var(--fh);font-weight:900;
+  font-size:1.1rem;color:#fff;letter-spacing:-.01em;
+}
+.proc-cta p{font-size:.82rem;color:oklch(1 0 0 /.5);margin-top:2px}
+
+
+/* ─────────────────────────────────────────────────────
+   TESTIMONIALS — pull quotes, no cards
+───────────────────────────────────────────────────── */
+.tcs{padding:72px 0;background:var(--bg)}
+.tcs h2{color:var(--ink);margin-bottom:40px}
+
+.tc-list{
+  display:flex;flex-direction:column;
+  border-top:1px solid var(--rule);
+}
+.tc{
+  padding:28px 0;
+  border-bottom:1px solid var(--rule);
+  display:flex;flex-direction:column;gap:14px;
+}
+.tc-stars{display:flex;gap:3px}
+.tc-stars svg{width:13px;height:13px;fill:var(--gold)}
+.tc-q{
+  font-family:var(--fh);font-weight:600;
+  font-size:clamp(1rem,2vw,1.2rem);
+  color:var(--ink);line-height:1.45;
+  text-wrap:pretty;max-width:58ch;
+}
+.tc-attr{
+  display:flex;align-items:center;gap:12px;
+}
+.tc-dot{width:20px;height:2px;background:var(--gold);flex-shrink:0}
+.tc-name{font-family:var(--fh);font-weight:700;font-size:.78rem;color:var(--ink);letter-spacing:.02em}
+.tc-role{font-size:.72rem;color:var(--muted)}
+
+/* ─────────────────────────────────────────────────────
+   CONTACT
+───────────────────────────────────────────────────── */
+.contact{padding:72px 0;background:var(--dark-bg)}
+
+.wa-strip{
+  border:1px solid oklch(1 0 0 /.12);
+  padding:36px 28px;
+  margin-bottom:52px;
+  display:flex;flex-direction:column;gap:12px;
+}
+.wa-strip-label{
+  font-family:var(--fh);font-size:.62rem;font-weight:700;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:oklch(1 0 0 /.38);
+}
+/* BIG phone number — the hero of this section */
+.wa-number{
+  font-family:var(--fh);font-weight:900;
+  font-size:clamp(2rem,6vw,5rem);
+  color:var(--gold);letter-spacing:-.02em;
+  line-height:1;display:block;
+}
+.wa-number a{color:inherit;transition:opacity .15s}
+.wa-number a:hover{opacity:.75}
+.wa-desc{font-size:.85rem;color:oklch(1 0 0 /.45)}
+
+.ct-layout{display:flex;flex-direction:column;gap:40px}
+.ct-info{display:flex;flex-direction:column;gap:16px}
+.ci{display:flex;align-items:flex-start;gap:14px}
+.ci-lbl{
+  font-family:var(--fh);font-size:.6rem;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--gold);
+}
+.ci-val{font-size:.88rem;color:oklch(1 0 0 /.7);line-height:1.5;margin-top:2px}
+.ci-val a{color:oklch(1 0 0 /.7);transition:color .12s}
+.ci-val a:hover{color:var(--gold)}
+
+.ct-form{display:flex;flex-direction:column;gap:10px}
+.ct-form h3{
+  font-family:var(--fh);font-weight:700;
+  font-size:1rem;color:#fff;margin-bottom:4px;
+}
+.fg input,.fg select,.fg textarea{
+  width:100%;padding:12px 14px;
+  font-family:var(--fb);font-size:.88rem;
+  background:oklch(1 0 0 /.06);
+  border:1px solid oklch(1 0 0 /.15);
+  color:#fff;outline:none;
+  transition:border-color .14s;-webkit-appearance:none;
+}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--gold)}
+.fg input::placeholder,.fg textarea::placeholder{color:oklch(1 0 0 /.28)}
+.fg select{color:oklch(1 0 0 /.65);cursor:pointer}
+.fg select option{background:var(--dark-bg);color:#fff}
+.fg textarea{resize:vertical;min-height:80px}
+.fg-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.form-note{font-size:.7rem;color:oklch(1 0 0 /.28);line-height:1.5;margin-top:2px}
+.form-note a{color:var(--gold)}
+
+/* ─────────────────────────────────────────────────────
+   FOOTER
+───────────────────────────────────────────────────── */
+.footer{
+  background:var(--dark-bg);
+  border-top:3px solid var(--ink);
+  padding:36px 0 20px;
+}
+.footer-inner{
+  display:flex;flex-direction:column;gap:20px;
+  padding-bottom:20px;
+  border-bottom:1px solid var(--rule-dark);
+  margin-bottom:16px;
+}
+.footer-logo img{height:30px;width:auto;filter:brightness(0) invert(1)}
+.footer-desc{font-size:.78rem;color:oklch(1 0 0 /.35);line-height:1.65;max-width:300px;margin-top:6px}
+.footer-links{list-style:none;display:flex;flex-wrap:wrap;gap:12px}
+.footer-links a{
+  font-family:var(--fh);font-size:.68rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:oklch(1 0 0 /.35);transition:color .12s;
+}
+.footer-links a:hover{color:var(--gold)}
+.footer-copy{font-size:.68rem;color:oklch(1 0 0 /.2)}
+
+/* Redes sociales */
+.social-links{display:flex;align-items:center;gap:12px;margin-top:12px}
+.social-btn{
+  display:flex;align-items:center;justify-content:center;
+  width:38px;height:38px;
+  border-radius:8px;
+  border:1px solid oklch(1 0 0 /.15);
+  color:oklch(1 0 0 /.5);
+  transition:background .15s,border-color .15s,color .15s,transform .14s;
+}
+.social-btn:hover{transform:translateY(-2px)}
+.social-btn.ig:hover{
+  background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);
+  border-color:transparent;color:#fff;
+}
+.social-btn.fb:hover{
+  background:#1877f2;
+  border-color:transparent;color:#fff;
+}
+.social-btn svg{width:20px;height:20px;fill:currentColor}
+
+/* wa-float eliminado — reemplazado por el chatbot */
+
+/* ─────────────────────────────────────────────────────
+   ACCESSIBILITY
+───────────────────────────────────────────────────── */
+@media(prefers-reduced-motion:reduce){
+  .wa-dot{animation:none}
+  *{transition-duration:.01ms !important}
+}
+/* ─────────────────────────────────────────────────────
+   CHATBOT — Asistente de cotización
+───────────────────────────────────────────────────── */
+.cb-btn{
+  position:fixed;bottom:20px;right:20px;z-index:var(--z-float);
+  width:56px;height:56px;border-radius:50%;
+  /* Dorado de marca — visible, reconocible, llama a la acción */
+  background:var(--gold);color:var(--ink);border:none;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
+  box-shadow:0 4px 20px oklch(0.68 0.128 85 /.5);
+  transition:transform .2s,box-shadow .2s,background .15s;
+}
+.cb-btn:hover{background:var(--gold-d);transform:scale(1.08);box-shadow:0 6px 28px oklch(0.68 0.128 85 /.6)}
+.cb-btn svg{width:24px;height:24px;fill:var(--ink);transition:transform .2s}
+.cb-btn.open{background:var(--gold-d)}
+.cb-btn.open svg.ico-chat{display:none}
+.cb-btn.open svg.ico-close{display:block!important}
+
+.cb-panel{
+  position:fixed;bottom:88px;right:20px;
+  width:340px;max-width:calc(100vw - 40px);
+  background:var(--dark-bg);
+  border:1px solid oklch(1 0 0 /.1);
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 16px 56px oklch(0 0 0 /.5);
+  z-index:var(--z-float);
+  display:flex;flex-direction:column;
+  max-height:min(520px, calc(100svh - 120px));
+  transform:translateY(12px) scale(.97);
+  opacity:0;
+  pointer-events:none;
+  transition:transform .25s cubic-bezier(.22,.61,.36,1),opacity .25s;
+}
+.cb-panel.open{transform:translateY(0) scale(1);opacity:1;pointer-events:all}
+
+/* Header */
+.cb-head{
+  padding:14px 16px;
+  background:var(--ink);
+  display:flex;align-items:center;gap:10px;
+  flex-shrink:0;
+}
+.cb-head-dot{width:8px;height:8px;background:var(--wa);border-radius:50%;flex-shrink:0;animation:wap 2.5s ease-out infinite}
+.cb-head-info{flex:1}
+.cb-head-name{font-family:var(--fh);font-weight:700;font-size:.82rem;color:#fff;letter-spacing:.02em}
+.cb-head-status{font-size:.65rem;color:oklch(1 0 0 /.45);margin-top:1px}
+
+/* Messages */
+.cb-msgs{
+  flex:1;overflow-y:auto;
+  padding:16px 14px;
+  display:flex;flex-direction:column;gap:10px;
+  scrollbar-width:thin;scrollbar-color:oklch(1 0 0 /.12) transparent;
+}
+
+.cb-msg{max-width:88%;display:flex;flex-direction:column;gap:3px}
+.cb-msg.bot{align-self:flex-start}
+.cb-msg.usr{align-self:flex-end}
+
+.cb-bubble{
+  padding:9px 13px;border-radius:12px;
+  font-size:.82rem;line-height:1.55;
+}
+.cb-msg.bot .cb-bubble{
+  background:oklch(1 0 0 /.07);color:oklch(1 0 0 /.88);
+  border-bottom-left-radius:3px;
+}
+.cb-msg.usr .cb-bubble{
+  background:var(--gold);color:var(--ink);font-weight:600;
+  border-bottom-right-radius:3px;
+}
+
+/* Typing indicator */
+.cb-typing{display:flex;align-items:center;gap:4px;padding:10px 13px;background:oklch(1 0 0 /.07);border-radius:12px;border-bottom-left-radius:3px;width:fit-content}
+.cb-typing span{width:6px;height:6px;background:oklch(1 0 0 /.4);border-radius:50%;animation:cbDot 1.2s ease-in-out infinite}
+.cb-typing span:nth-child(2){animation-delay:.2s}
+.cb-typing span:nth-child(3){animation-delay:.4s}
+@keyframes cbDot{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
+
+/* Options */
+.cb-opts{display:flex;flex-wrap:wrap;gap:6px;padding:2px 0}
+.cb-opt{
+  padding:8px 14px;border-radius:8px; /* rectangular — más legible con texto largo */
+  font-family:var(--fb);font-size:.74rem;font-weight:600;
+  letter-spacing:.01em; /* sin tracking exagerado para que las medidas sean claras */
+  text-align:left;line-height:1.3;
+  background:transparent;color:var(--gold);
+  border:1.5px solid oklch(0.68 0.128 85 /.35);
+  cursor:pointer;transition:background .14s,border-color .14s,color .14s;
+  font-variant-numeric:tabular-nums;
+}
+.cb-opt:hover{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+.cb-opt:disabled{opacity:.4;cursor:default;pointer-events:none}
+
+/* Input area */
+.cb-input-row{
+  padding:10px 12px;
+  border-top:1px solid oklch(1 0 0 /.08);
+  display:flex;gap:8px;flex-shrink:0;
+}
+.cb-input{
+  flex:1;background:oklch(1 0 0 /.07);
+  border:1px solid oklch(1 0 0 /.15);
+  border-radius:8px;
+  padding:9px 12px;
+  font-family:var(--fb);font-size:.82rem;
+  color:#fff;outline:none;
+  transition:border-color .14s;
+}
+.cb-input:focus{border-color:var(--gold)}
+.cb-input::placeholder{color:oklch(1 0 0 /.3)}
+.cb-send{
+  width:36px;height:36px;flex-shrink:0;
+  background:var(--gold);border:none;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:background .14s;
+}
+.cb-send:hover{background:var(--gold-d)}
+.cb-send svg{width:16px;height:16px;fill:var(--ink)}
+
+/* Final actions */
+.cb-actions{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+.cb-actions .btn{font-size:.72rem;padding:10px 16px;min-height:40px;border-radius:8px;width:100%;justify-content:center}
+
+@media(max-width:599px){
+  .cb-btn{bottom:16px;right:16px;left:auto;width:48px;height:48px}
+  .cb-panel{bottom:76px;right:16px;left:16px;width:auto;max-width:none;border-radius:12px;max-height:calc(100svh - 100px)}
+}
+
+.seo{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+
+/* ═══════════════════════════════════════════════════
+   RESPONSIVE — mobile first
+═══════════════════════════════════════════════════ */
+
+/* 480px */
+@media(min-width:480px){
+  .prod-grid{grid-template-columns:repeat(3,1fr)}
+  .pc-img{height:115px}
+  .pc-desc{display:block}
+}
+
+/* 640px */
+@media(min-width:640px){
+  :root{--px:32px}
+  .hero-actions{flex-direction:row}
+  .hero-photo{max-height:460px}
+  .why-inner{grid-template-columns:1fr}
+  /* Proceso horizontal en desktop */
+  .proc-steps{
+    flex-direction:row;
+    border-top:none;
+    position:relative;
+  }
+  /* Línea conectora entre pasos */
+  .proc-steps::before{
+    content:'';
+    position:absolute;
+    top:22px;left:5%;right:5%;
+    height:1px;background:var(--rule);
+    z-index:0;
+  }
+  .ps{
+    flex:1;flex-direction:column;align-items:flex-start;
+    border-bottom:none;border-right:1px solid var(--rule);
+    padding:0 24px 28px;
+    position:relative;z-index:1;
+  }
+  .ps:first-child{padding-left:0}
+  .ps:last-child{border-right:none;padding-right:0}
+  /* Número con fondo blanco para "cortar" la línea conectora */
+  .ps-n{
+    font-size:2.2rem;
+    background:var(--bg);
+    padding-right:8px;
+    margin-bottom:14px;
+    min-width:auto;
+  }
+  .tc-list{flex-direction:row}
+  .tc{flex:1;border-bottom:none;border-right:1px solid var(--rule);padding:0 28px 0 0}
+  .tc:first-child{padding-left:0}
+  .tc:last-child{border-right:none;padding-right:0}
+  .gal-grid{grid-template-columns:repeat(3,1fr);grid-template-rows:220px 180px}
+  .gi:first-child{grid-column:span 2;height:auto}
+  .ct-layout{flex-direction:row;gap:52px}
+  .ct-info{flex:1}
+  .ct-form{flex:1.3}
+  .wa-strip{flex-direction:row;align-items:center;justify-content:space-between;flex-wrap:wrap}
+  .footer-inner{flex-direction:row;align-items:flex-start;justify-content:space-between}
+  .wa-lbl{display:inline}
+  .wa-float{bottom:24px;right:24px}
+}
+
+/* 900px — desktop proper */
+@media(min-width:900px){
+  :root{--px:40px}
+  .nav-links{display:flex}
+  .nav-phone{display:block}
+  .nav-toggle{display:none}
+
+  /* Hero full-bleed desktop */
+  .hero{min-height:calc(100svh - 64px)}
+  .hero-text{
+    padding:96px 72px;
+    max-width:760px;
+  }
+  .hero-actions{flex-direction:row}
+  .hero h1{font-size:clamp(3rem,4.5vw,5.5rem)}
+
+  /* Catalog: 3 cols on desktop (hover preview replaces image) */
+  .prod-grid{grid-template-columns:repeat(3,1fr)}
+  .pc-img{height:140px}
+
+  /* Why: 3 statements — bigger numbers on desktop */
+  .ws-n{font-size:clamp(3rem,5vw,4.5rem)}
+
+  /* Process: horizontal */
+  /* 900px: más espacio interno */
+  .ps{padding:0 32px 28px}
+  .ps:first-child{padding-left:0}
+  .ps:last-child{padding-right:0}
+  .ps:last-child{border-right:none}
+
+  /* Gallery: 4-col masonry */
+  .gal-grid{
+    grid-template-columns:3fr 2fr 2fr;
+    grid-template-rows:280px 200px;
+  }
+  .gi:first-child{grid-column:1;grid-row:span 2;height:auto}
+  .gi:nth-child(2){grid-column:2;grid-row:1;height:auto}
+  .gi:nth-child(3){grid-column:3;grid-row:1;height:auto}
+  .gi:nth-child(4){grid-column:2;grid-row:2;height:auto}
+  .gi:nth-child(5){grid-column:3;grid-row:2;height:auto}
+
+  /* Testimonials: 3-col */
+  .tc-list{flex-direction:row}
+  .tc{border-right:1px solid var(--rule);padding:0 32px 0 0;border-bottom:none}
+  .tc:first-child{padding-left:0}
+  .tc:last-child{border-right:none;padding-right:0}
+}
+
+/* 1200px */
+@media(min-width:1200px){
+  :root{--px:52px}
+  .hero-text{padding:80px 72px}
+  /* 3 cols: 9 productos / 3 = 3 filas exactas, sin celdas vacías */
+  .prod-grid{grid-template-columns:repeat(3,1fr)}
+}
+
+/* Catálogo 2-col móvil: último producto solo → ocupa ambas columnas */
+@media(max-width:479px){
+  .pc:last-child:nth-child(odd){grid-column:span 2}
+}
+
+/* Mobile small */
+@media(max-width:599px){
+  body{padding-bottom:76px}
+  .wa-float-btn .wa-lbl{display:none}
+  .wa-float-btn{padding:14px;border-radius:50%}
+  .fg-2{grid-template-columns:1fr}
+  .tc:last-child{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="sp" aria-hidden="true"></div>
+
+<!-- ▓▓ NAV ▓▓ -->
+<header>
+<nav class="nav" id="mainNav" aria-label="Navegación">
+  <div class="nav-inner">
+    <a href="#inicio" class="nav-logo" aria-label="NorteAcero">
+      <img src="logo/norte-acero-logotipo.png" alt="NorteAcero" height="36"/>
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="#catalogo">Catálogo</a></li>
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#proceso">Proceso</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <div class="nav-right">
+      <span class="nav-phone">81 3499 0514</span>
+      <div class="nav-cta">
+        <a href="https://wa.me/528131113850?text=Hola%2C%20quiero%20cotizar%20acero" class="btn btn-gold" target="_blank" rel="noopener">
+          <svg class="ico-wa" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Cotizar ahora
+        </a>
+      </div>
+      <button class="nav-toggle" aria-label="Menú" aria-expanded="false" onclick="toggleNav(this)">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+<nav class="m-nav" id="mobileNav" aria-label="Menú móvil">
+  <a href="#catalogo" onclick="closeNav()">Catálogo</a>
+  <a href="#nosotros" onclick="closeNav()">Nosotros</a>
+  <a href="#proceso" onclick="closeNav()">Proceso</a>
+  <a href="#contacto" onclick="closeNav()">Contacto</a>
+  <a href="catalogo-descargar.pdf" target="_blank" rel="noopener" onclick="closeNav()">Descargar catálogo PDF</a>
+</nav>
+</header>
+
+<!-- ▓▓ HERO ▓▓ -->
+<section id="inicio" class="hero" aria-labelledby="hero-h1">
+
+  <!-- Imagen de fondo completa -->
+  <img class="hero-bg-img" src="hero/hero-norte-acero.png"
+       alt="Almacén de acero NorteAcero Monterrey — inventario de PTR, lámina y vigas"
+       loading="eager"/>
+
+  <!-- Overlay para legibilidad -->
+  <div class="hero-overlay" aria-hidden="true"></div>
+
+  <!-- Texto sobre la imagen -->
+  <div class="hero-text">
+    <h1 id="hero-h1">
+      Venta de acero<br/>en Monterrey.
+      <strong>Entrega rápida.</strong>
+    </h1>
+    <p class="hero-sub">PTR, lámina galvanizada, acanalada, polines, vigas, soleras, varilla y acero estructural para constructoras, herreros y talleres.</p>
+    <div class="hero-actions">
+      <a href="#catalogo" class="btn btn-out-wh">Ver catálogo</a>
+    </div>
+
+    <!-- Párrafo explicativo -->
+    <p class="hero-extra">
+      Somos distribuidores directos de acero en Monterrey con más de 15 años surtiendo a constructoras, herreros, talleres metalmecánicos y empresas manufactureras. Cotizamos en menos de 2 horas y entregamos en toda la zona metropolitana.
+    </p>
+
+    <!-- Mini puntos clave -->
+    <div class="hero-facts" aria-label="Características principales">
+      <div class="hf"><span class="hf-dot" aria-hidden="true"></span>Inventario disponible hoy</div>
+      <div class="hf"><span class="hf-dot" aria-hidden="true"></span>Entrega en MTY y área metro</div>
+      <div class="hf"><span class="hf-dot" aria-hidden="true"></span>Material certificado NMX</div>
+      <div class="hf"><span class="hf-dot" aria-hidden="true"></span>Asesoría técnica sin costo</div>
+    </div>
+
+    <!-- Trust as a single line — not a metric card grid -->
+    <p class="hero-trust">+15 años en Monterrey &nbsp;·&nbsp; +500 clientes &nbsp;·&nbsp; Cotización en menos de 2 horas &nbsp;·&nbsp; Material NMX</p>
+  </div>
+
+</section>
+
+<div class="rule-heavy" aria-hidden="true"></div>
+
+<!-- ▓▓ CATÁLOGO ▓▓ -->
+<section id="catalogo" class="catalog">
+  <div class="w">
+    <div class="cat-header">
+      <h2>Catálogo de materiales</h2>
+      <p>9 líneas de producto en bodega. Cotiza por WhatsApp en menos de 2 horas.</p>
+    </div>
+
+    <div class="prod-grid" role="list">
+
+      <article class="pc" role="listitem">
+        <div class="pc-img pi-ptr"><img src="catalogo/PTR-Cuadrado-y-Rectangular.png" alt="PTR Cuadrado y Rectangular — NorteAcero Monterrey" loading="lazy"/><span class="pc-badge">Tubería</span></div>
+        <div class="pc-body">
+          <h3 class="pc-name">PTR Cuadrado y Rectangular</h3>
+          <p class="pc-specs">½" a 6" · Esp. 1.5–6 mm</p>
+          <p class="pc-desc">Para estructuras, marcos y herrería.</p>
+          <div class="pc-cta"><a href="https://wa.me/528131113850?text=Quiero%20cotizar%20PTR" class="btn btn-gold" target="_blank" rel="noopener">Cotizar</a></div>
+        </div>
+      </article>
+
+      <article class="pc" role="listitem">
+        <div class="pc-img pi-galv"><img src="catalogo/Lamina-Galvanizada.jpg" alt="Lámina Galvanizada — NorteAcero Monterrey" loading="lazy"/><span class="pc-badge">Lámina</span></div>
+        <div class="pc-body">
+          <h3 class="pc-name">Lámina Galvanizada</h3>
+          <p class="pc-specs">Cal. 20 · 22 · 24 · 26 · 28</p>
+          <p class="pc-desc">Techos, muros y revestimientos.</p>
+          <div class="pc-cta"><a href="https://wa.me/528131113850?text=Quiero%20cotizar%20Lámina%20Galvanizada" class="btn btn-gold" target="_blank" rel="noopener">Cotizar</a></div>
+        </div>
+      </article>
+
+      <article class="pc" role="listitem">
+        <div class="pc-img pi-acan"><img src="catalogo/Lámina Acanalada.webp" alt="Lámina Acanalada — NorteAcero Monterrey" loading="lazy"/><span class="pc-badge">Lámina</span></div>
+        <div class="pc-body">
+          <h3 class="pc-name">Lámina Acanalada</h3>
+          <p class="pc-specs">R-72 · R-101 · Teja</p>
+          <p class="pc-desc">Naves industriales y bodegas.</p>
+          <div class="pc-cta"><a href="https://wa.me/528131113850?text=Quiero%20cotizar%20Lámina%20Acanalada" class="btn btn-gold" target="_blank" rel="noopener">Cotizar</a></div>
+        </div>
+      </article>
+
+      <article class="pc" role="listitem">
+        <div class="pc-img pi-pol"><img src="catalogo/Polines C y Z.jpg" alt="Polines C y Z — NorteAcero Monterrey" loading="lazy"/><span class="pc-badge">Perfil</span></div>
+        <div class="pc-body">
+          <h3 class="pc-name">Polines C y Z</h3>
+          <p class="pc-specs">Cal. 14 · 16 · 18 · 20</p>
+          <p class="pc-desc">Estructuras de techo ligero.</p>
+          <div class="pc-cta"><a href="https://wa.me/528131113850?text=Quiero%20cotizar%20Polines" class="btn btn-gold" target="_blank" rel="noopener">Cotizar</a></div>
+        </div>
+      </article>
+
+      <article class="pc" role="listitem">
+        <div class="pc-img pi-viga"><img src="catalogo/Vigas IR · IP · WF.jpg" alt="Vigas IR IP WF — NorteAcero Monterrey" loading="lazy"/><span class="pc-badge">Estructural</span></div>
+        <div class="pc-body">
+          <h3 class="pc-name">Vigas IR · IP · WF</h3>
+          <p class="pc-specs">IR-4 a IR-24 · IP · WF</p>
+          <p class="pc-desc">Naves industriales y puentes.</p>
+          <div class="pc-cta"><a href="https://wa.me/528131113850?text=Quiero%20cotizar%20Vigas" class="btn btn-gold" target="_blank" rel="noopener">Cotizar</a></div>
+        </div>
+      </article>
+
+      <article class="pc" role="listitem">
+        <div class="pc-img pi-sol"><img src="catalogo/Soleras y Ángulos.jpg" alt="Soleras y Ángulos — NorteAcero Monterrey" loading="lazy"/><span class="pc-badge">Perfil</span></div>
+        <div class="pc-body">
+          <h3 class="pc-name">Soleras y Ángulos</h3>
+          <p class="pc-specs">¾" a 4" · Varios espesores</p>
+          <p class="pc-desc">Marcos, refuerzos, fabricación.</p>
+          <div class="pc-cta"><a href="https://wa.me/528131113850?text=Quiero%20cotizar%20Soleras" class="btn btn-gold" target="_blank" rel="noopener">Cotizar</a></div>
+        </div>
+      </article>
+
+      <article class="pc" role="listitem">
+        <div class="pc-img pi-var"><img src="catalogo/Varilla Corrugada.webp" alt="Varilla Corrugada — NorteAcero Monterrey" loading="lazy"/><span class="pc-badge">Varilla</span></div>
+        <div class="pc-body">
+          <h3 class="pc-name">Varilla Corrugada</h3>
+          <p class="pc-specs">3/8" · ½" · 5/8" · ¾" · 1"</p>
+          <p class="pc-desc">Cimentaciones y obra civil. Norma NMX.</p>
+          <div class="pc-cta"><a href="https://wa.me/528131113850?text=Quiero%20cotizar%20Varilla" class="btn btn-gold" target="_blank" rel="noopener">Cotizar</a></div>
+        </div>
+      </article>
+
+      <article class="pc" role="listitem">
+        <div class="pc-img pi-est"><img src="catalogo/Acero Estructural.webp" alt="Acero Estructural — NorteAcero Monterrey" loading="lazy"/><span class="pc-badge">Estructural</span></div>
+        <div class="pc-body">
+          <h3 class="pc-name">Acero Estructural</h3>
+          <p class="pc-specs">A-36 · A-572 Gr. 50</p>
+          <p class="pc-desc">Proyectos industriales y comerciales.</p>
+          <div class="pc-cta"><a href="https://wa.me/528131113850?text=Quiero%20cotizar%20Acero%20Estructural" class="btn btn-gold" target="_blank" rel="noopener">Cotizar</a></div>
+        </div>
+      </article>
+
+      <article class="pc" role="listitem">
+        <div class="pc-img pi-pla"><img src="catalogo/Corte de Placa.webp" alt="Corte de Placa — NorteAcero Monterrey" loading="lazy"/><span class="pc-badge">Placa</span></div>
+        <div class="pc-body">
+          <h3 class="pc-name">Corte de Placa</h3>
+          <p class="pc-specs">1/8" a 4" · HR · CR · A-36</p>
+          <p class="pc-desc">A la medida exacta. Entrega rápida.</p>
+          <div class="pc-cta"><a href="https://wa.me/528131113850?text=Quiero%20cotizar%20Corte%20de%20Placa" class="btn btn-gold" target="_blank" rel="noopener">Cotizar</a></div>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="cat-foot">
+      <p>¿Buscas una medida o referencia especial? Tenemos más de 200 productos.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a href="catalogo-descargar.pdf" target="_blank" rel="noopener" class="btn btn-out">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Descargar catálogo PDF
+        </a>
+        <a href="https://wa.me/528131113850?text=Busco%20un%20material%20que%20no%20encuentro" class="btn btn-out" target="_blank" rel="noopener">Consultar disponibilidad</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Catalog hover preview -->
+<div id="catPreview" aria-hidden="true">
+  <div id="catPreviewInner"></div>
+  <div id="catPreviewOverlay"></div>
+</div>
+
+<div class="rule-heavy" aria-hidden="true"></div>
+
+<!-- ▓▓ POR QUÉ — editorial statements ▓▓ -->
+<section id="nosotros" class="why">
+  <div class="w">
+    <h2 style="color:#fff;margin-bottom:32px">Por qué NorteAcero.</h2>
+    <div class="why-inner" role="list">
+      <div class="why-stat" role="listitem">
+        <span class="ws-n">&lt;2h</span>
+        <div class="ws-text">
+          <h3>Cotización en menos de 2 horas</h3>
+          <p>Enviamos precios el mismo día. Si tienes urgencia, lo decimos y priorizamos. Sin esperas de 2 días para recibir un número.</p>
+        </div>
+      </div>
+      <div class="why-stat" role="listitem">
+        <span class="ws-n">NMX</span>
+        <div class="ws-text">
+          <h3>Material con especificaciones verificadas</h3>
+          <p>Trabajamos con proveedores certificados. El acero cumple NMX y ASTM. Sin sorpresas en obra ni en auditoría de proyecto.</p>
+        </div>
+      </div>
+      <div class="why-stat" role="listitem">
+        <span class="ws-n">+500</span>
+        <div class="ws-text">
+          <h3>Clientes activos en Monterrey y zona metropolitana</h3>
+          <p>Constructoras, herreros, talleres y manufactureras. Por pieza o por tonelada. Sin mínimos que no tengan sentido.</p>
+        </div>
+      </div>
+      <div class="why-stat" role="listitem">
+        <span class="ws-n">+15</span>
+        <div class="ws-text">
+          <h3>Años distribuyendo acero en Monterrey</h3>
+          <p>Hemos surtido proyectos residenciales, comerciales e industriales en toda la zona. Conocemos las urgencias del ramo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule-heavy" aria-hidden="true"></div>
+
+<!-- ▓▓ PROCESO ▓▓ -->
+<section id="proceso" class="process">
+  <div class="w">
+    <h2>Tres pasos para recibir tu material.</h2>
+    <div class="proc-steps" role="list">
+      <div class="ps" role="listitem">
+        <span class="ps-n" aria-hidden="true">1</span>
+        <div>
+          <h3>Solicita tu cotización</h3>
+          <p>Por WhatsApp, teléfono o formulario. Material, medida y cantidad. Si tienes duda técnica, te orientamos sin costo.</p>
+        </div>
+      </div>
+      <div class="ps" role="listitem">
+        <span class="ps-n" aria-hidden="true">2</span>
+        <div>
+          <h3>Recibe tu propuesta</h3>
+          <p>Precios claros con tiempo de entrega en menos de 2 horas. Sin letra chica.</p>
+        </div>
+      </div>
+      <div class="ps" role="listitem">
+        <span class="ps-n" aria-hidden="true">3</span>
+        <div>
+          <h3>Entregamos el material</h3>
+          <p>Directo a tu obra o bodega en Monterrey y zona metropolitana. Coordinamos el horario contigo.</p>
+        </div>
+      </div>
+    </div>
+    <div class="proc-cta">
+      <div>
+        <h3>¿Listo para cotizar?</h3>
+        <p>Respondemos en menos de 2 horas en horario hábil.</p>
+      </div>
+      <a href="https://wa.me/528131113850?text=Hola%2C%20quiero%20empezar%20una%20cotización" class="btn btn-gold" target="_blank" rel="noopener">
+        <svg class="ico-wa" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Empezar por WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="rule-heavy" aria-hidden="true"></div>
+
+<!-- ▓▓ TESTIMONIOS — pull quotes, no cards ▓▓ -->
+<section class="tcs">
+  <div class="w">
+    <h2>Lo que dicen nuestros clientes.</h2>
+    <div class="tc-list" role="list">
+      <article class="tc" role="listitem">
+        <div class="tc-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        <p class="tc-q">"Llevamos más de 3 años comprando con NorteAcero. Siempre tienen el material y responden rápido. En construcción el tiempo es dinero y ellos lo entienden."</p>
+        <div class="tc-attr"><span class="tc-dot" aria-hidden="true"></span><div><div class="tc-name">Roberto Castillo</div><div class="tc-role">Director · Constructora Castillo e Hijos</div></div></div>
+      </article>
+      <article class="tc" role="listitem">
+        <div class="tc-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        <p class="tc-q">"Mi taller compra PTR semanalmente. NorteAcero surte al día siguiente. Precio justo, trato directo. No necesito cotizar en tres lados."</p>
+        <div class="tc-attr"><span class="tc-dot" aria-hidden="true"></span><div><div class="tc-name">Miguel Vega</div><div class="tc-role">Propietario · Herrería Vega, Guadalupe NL</div></div></div>
+      </article>
+      <article class="tc" role="listitem">
+        <div class="tc-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        <p class="tc-q">"Compramos lámina y vigas para una nave de 1,800 m². Asesoría técnica incluida, entrega puntual, material correcto. Sin contratiempos."</p>
+        <div class="tc-attr"><span class="tc-dot" aria-hidden="true"></span><div><div class="tc-name">Lic. Laura Martínez</div><div class="tc-role">Gerente de Compras · Grupo Industrial Regio</div></div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<div class="rule-heavy" aria-hidden="true"></div>
+
+<!-- ▓▓ CONTACTO ▓▓ -->
+<section id="contacto" class="contact">
+  <div class="w">
+
+    <div class="wa-strip">
+      <span class="wa-strip-label">WhatsApp directo</span>
+      <span class="wa-number"><a href="https://wa.me/528131113850">81 3111 3850</a></span>
+      <p class="wa-desc">Respondemos en menos de 2 horas en días hábiles.</p>
+      <a href="https://wa.me/528131113850?text=Hola%2C%20quiero%20cotizar%20acero" class="btn btn-wa" target="_blank" rel="noopener">
+        <svg class="ico-wa" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Abrir WhatsApp
+      </a>
+    </div>
+
+    <!-- Datos de contacto — formulario reemplazado por el chatbot -->
+    <div class="ct-info">
+      <div class="ci"><div><div class="ci-lbl">Teléfono</div><div class="ci-val"><a href="tel:+528134990514">81 3499 0514</a></div></div></div>
+      <div class="ci"><div><div class="ci-lbl">WhatsApp</div><div class="ci-val"><a href="https://wa.me/528131113850">81 3111 3850</a></div></div></div>
+      <div class="ci"><div><div class="ci-lbl">Correo</div><div class="ci-val"><a href="mailto:ventas@norteacero.mx">ventas@norteacero.mx</a></div></div></div>
+      <div class="ci"><div><div class="ci-lbl">Ubicación</div><div class="ci-val">Zona Industrial, Monterrey, N.L.</div></div></div>
+      <div class="ci"><div><div class="ci-lbl">Horarios</div><div class="ci-val">Lun–Vie 8:00–18:00 · Sáb 8:00–14:00</div></div></div>
+      <div class="ci">
+        <div>
+          <div class="ci-lbl">Redes sociales</div>
+          <div style="display:flex;gap:10px;margin-top:6px">
+            <a href="https://www.instagram.com/norteacero_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="social-btn ig" target="_blank" rel="noopener" aria-label="Instagram NorteAcero">
+              <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <a href="https://www.facebook.com/p/NorteAcero-100084214682991/" class="social-btn fb" target="_blank" rel="noopener" aria-label="Facebook NorteAcero">
+              <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ▓▓ FOOTER ▓▓ -->
+<footer class="footer" role="contentinfo">
+  <div class="w">
+    <div class="footer-inner">
+      <div>
+        <a href="#inicio" class="footer-logo" aria-label="NorteAcero"><img src="logo/norte-acero-logotipo.png" alt="NorteAcero" height="30"/></a>
+        <p class="footer-desc">Distribuidora de acero para constructoras, herreros, talleres y fabricadores en Monterrey, N.L. y zona metropolitana.</p>
+        <!-- Redes sociales -->
+        <div class="social-links" aria-label="Redes sociales">
+          <a href="https://www.instagram.com/norteacero_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="social-btn ig" target="_blank" rel="noopener" aria-label="Instagram de NorteAcero">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/p/NorteAcero-100084214682991/" class="social-btn fb" target="_blank" rel="noopener" aria-label="Facebook de NorteAcero">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+        </div>
+      </div>
+      <ul class="footer-links" role="list">
+        <li><a href="#catalogo">Catálogo</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#proceso">Proceso</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li><a href="https://wa.me/528131113850" target="_blank" rel="noopener">WhatsApp</a></li>
+        <li><a href="catalogo-descargar.pdf" target="_blank" rel="noopener">Catálogo PDF</a></li>
+      </ul>
+    </div>
+    <p class="footer-copy">© 2025 NorteAcero S.A. de C.V. · Monterrey, Nuevo León · Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<!-- ▓▓ CHATBOT — Asistente de cotización ▓▓ -->
+<button class="cb-btn" id="cbBtn" aria-label="Abrir asistente de cotización">
+  <!-- Chat icon -->
+  <svg class="ico-chat" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+  <!-- Close icon -->
+  <svg class="ico-close" viewBox="0 0 24 24" style="display:none"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+</button>
+
+<div class="cb-panel" id="cbPanel" aria-label="Asistente de cotización">
+  <div class="cb-head">
+    <span class="cb-head-dot" aria-hidden="true"></span>
+    <div class="cb-head-info">
+      <div class="cb-head-name">Asistente NorteAcero</div>
+      <div class="cb-head-status">Respuesta en menos de 2 horas</div>
+    </div>
+  </div>
+  <div class="cb-msgs" id="cbMsgs"></div>
+  <div class="cb-input-row" id="cbInputRow" style="display:none">
+    <input class="cb-input" id="cbInput" type="text" placeholder="Escribe aquí..."/>
+    <button class="cb-send" id="cbSendBtn" aria-label="Enviar">
+      <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+    </button>
+  </div>
+</div>
+
+
+<p class="seo" aria-hidden="true">Venta de acero Monterrey. PTR Monterrey. Lámina galvanizada Monterrey. Aceros estructurales Monterrey. Varilla corrugada Monterrey. Distribuidora acero Nuevo León.</p>
+
+<!-- Motion CDN — solo para scroll progress bar -->
+<script src="https://cdn.jsdelivr.net/npm/motion@latest/dist/motion.js"></script>
+
+<script>
+(function(){
+  /* NAV */
+  var nav=document.getElementById('mainNav');
+  window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>8);},{passive:true});
+  var mn=document.getElementById('mobileNav');
+  window.toggleNav=function(b){var o=mn.classList.toggle('open');b.setAttribute('aria-expanded',String(o));};
+  window.closeNav=function(){mn.classList.remove('open');var t=document.querySelector('.nav-toggle');if(t)t.setAttribute('aria-expanded','false');};
+  document.addEventListener('click',function(e){if(!mn.contains(e.target)&&!e.target.closest('.nav-toggle'))closeNav();});
+
+  /* SCROLL PROGRESS */
+  if(window.Motion){
+    var sp=document.querySelector('.sp');
+    if(sp) window.Motion.scroll(function(p){sp.style.transform='scaleX('+p+')';});
+  }
+
+  /* CATALOG HOVER PREVIEW — ProjectShowcase effect */
+  (function(){
+    if(window.matchMedia('(hover:none)').matches)return;
+    if(window.matchMedia('(max-width:900px)').matches)return;
+    var el=document.getElementById('catPreview');
+    var inner=document.getElementById('catPreviewInner');
+    var ov=document.getElementById('catPreviewOverlay');
+    if(!el||!inner||!ov)return;
+
+    var mx=0,my=0,sx=-600,sy=-600;
+    function lerp(a,b,t){return a+(b-a)*t;}
+
+    (function tick(){
+      sx=lerp(sx,mx,.12);sy=lerp(sy,my,.12);
+      var ox=(mx+310>window.innerWidth)?-296:24;
+      el.style.transform='translate3d('+(sx+ox)+'px,'+(sy-90)+'px,0)';
+      requestAnimationFrame(tick);
+    })();
+
+    document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;},{passive:true});
+
+    document.querySelectorAll('.pc').forEach(function(card){
+      var imgDiv=card.querySelector('.pc-img');
+      var nameEl=card.querySelector('.pc-name');
+      var specsEl=card.querySelector('.pc-specs');
+      if(!imgDiv)return;
+      var bgClass=Array.from(imgDiv.classList).find(function(c){return/^pi-.+/.test(c);});
+      var realImg=imgDiv.querySelector('img');
+
+      card.addEventListener('mouseenter',function(){
+        inner.innerHTML='';
+        if(realImg&&realImg.src&&!realImg.src.includes('undefined')){
+          var img=document.createElement('img');img.src=realImg.src;img.alt=realImg.alt||'';inner.appendChild(img);
+        }else if(bgClass){
+          var bg=document.createElement('div');bg.className=bgClass;bg.style.cssText='position:absolute;inset:0;';inner.appendChild(bg);
+        }
+        ov.innerHTML='';
+        if(nameEl){var n=document.createElement('span');n.className='cpn';n.textContent=nameEl.textContent;ov.appendChild(n);}
+        if(specsEl){var s=document.createElement('span');s.className='cps';s.textContent=specsEl.textContent;ov.appendChild(s);}
+        el.classList.add('active');
+      });
+      card.addEventListener('mouseleave',function(){el.classList.remove('active');});
+    });
+  })();
+
+})();
+</script>
+
+<!-- ══ CHATBOT JS ══════════════════════════════════ -->
+<script>
+(function(){
+  var btn    = document.getElementById('cbBtn');
+  var panel  = document.getElementById('cbPanel');
+  var msgs   = document.getElementById('cbMsgs');
+  var inputRow = document.getElementById('cbInputRow');
+  var input  = document.getElementById('cbInput');
+  var sendBtn= document.getElementById('cbSendBtn');
+  if(!btn||!panel||!msgs) return;
+
+  /* ── Toggle panel ── */
+  var isOpen = false;
+  btn.addEventListener('click', function(){
+    isOpen = !isOpen;
+    panel.classList.toggle('open', isOpen);
+    btn.classList.toggle('open', isOpen);
+    if(isOpen && msgs.children.length === 0) startFlow();
+  });
+  document.addEventListener('click', function(e){
+    if(isOpen && !panel.contains(e.target) && !btn.contains(e.target)){
+      isOpen = false;
+      panel.classList.remove('open');
+      btn.classList.remove('open');
+    }
+  });
+
+  /* ── Data collected ── */
+  var data = {};
+
+  /* ── Conversation steps ── */
+  var STEPS = [
+    {
+      key: 'material',
+      msg: '¡Hola! Soy el asistente de NorteAcero. ¿Qué material necesitas cotizar?',
+      type: 'options',
+      opts: [
+        'PTR  ·  ½" a 6" · esp. 1.5–6mm',
+        'Lámina Galvanizada  ·  Cal. 20 al 28',
+        'Lámina Acanalada  ·  R-72 · R-101 · Teja',
+        'Polines C/Z  ·  Cal. 14 · 16 · 18 · 20',
+        'Vigas  ·  IR-4 a IR-24 · IP · WF',
+        'Soleras y Ángulos  ·  ¾" a 4"',
+        'Varilla Corrugada  ·  3/8" · ½" · 5/8" · ¾" · 1"',
+        'Acero Estructural  ·  A-36 · A-572 Gr.50',
+        'Corte de Placa  ·  1/8" a 4"'
+      ]
+    },
+    {
+      key: 'specs',
+      msg: '¿Qué medidas o especificaciones necesitas? Por ejemplo: 2 pulgadas, calibre 22, espesor 2mm...',
+      type: 'text',
+      ph: 'Escribe las especificaciones...'
+    },
+    {
+      key: 'cantidad',
+      msg: '¿Cuántas piezas o qué cantidad necesitas?',
+      type: 'text',
+      ph: 'Ej: 50 piezas, 2 toneladas...'
+    },
+    {
+      key: 'urgencia',
+      msg: '¿Para cuándo lo necesitas?',
+      type: 'options',
+      opts: ['Esta semana','La próxima semana','Este mes','Sin fecha definida']
+    },
+    {
+      key: 'nombre',
+      msg: '¡Perfecto! Para enviarte la cotización, ¿cuál es tu nombre?',
+      type: 'text',
+      ph: 'Tu nombre completo...'
+    },
+    {
+      key: 'telefono',
+      msg: '¿Y tu número de teléfono?',
+      type: 'text',
+      ph: 'Ej: 81 1234 5678'
+    }
+  ];
+
+  var currentStep = 0;
+
+  /* ── Helpers ── */
+  function scrollBottom(){
+    setTimeout(function(){ msgs.scrollTop = msgs.scrollHeight; }, 50);
+  }
+
+  function addMsg(text, who){
+    var div = document.createElement('div');
+    div.className = 'cb-msg ' + who;
+    var bub = document.createElement('div');
+    bub.className = 'cb-bubble';
+    bub.textContent = text;
+    div.appendChild(bub);
+    msgs.appendChild(div);
+    scrollBottom();
+    return div;
+  }
+
+  function showTyping(cb){
+    var div = document.createElement('div');
+    div.className = 'cb-msg bot';
+    var t = document.createElement('div');
+    t.className = 'cb-typing';
+    t.innerHTML = '<span></span><span></span><span></span>';
+    div.appendChild(t);
+    msgs.appendChild(div);
+    scrollBottom();
+    setTimeout(function(){ msgs.removeChild(div); cb(); }, 800);
+  }
+
+  function showStep(step){
+    inputRow.style.display = 'none';
+    showTyping(function(){
+      addMsg(step.msg, 'bot');
+      if(step.type === 'options'){
+        var opts = document.createElement('div');
+        opts.className = 'cb-opts';
+        step.opts.forEach(function(o){
+          var b = document.createElement('button');
+          b.className = 'cb-opt';
+          b.textContent = o;
+          b.addEventListener('click', function(){
+            /* Disable all options */
+            opts.querySelectorAll('.cb-opt').forEach(function(x){ x.disabled = true; });
+            addMsg(o, 'usr');
+            data[step.key] = o;
+            currentStep++;
+            setTimeout(function(){ nextStep(); }, 300);
+          });
+          opts.appendChild(b);
+        });
+        var wrap = document.createElement('div');
+        wrap.className = 'cb-msg bot';
+        wrap.appendChild(opts);
+        msgs.appendChild(wrap);
+        scrollBottom();
+      } else {
+        /* Text input */
+        input.placeholder = step.ph || '';
+        input.value = '';
+        inputRow.style.display = 'flex';
+        setTimeout(function(){ input.focus(); }, 100);
+      }
+    });
+  }
+
+  function handleText(){
+    var val = input.value.trim();
+    if(!val) return;
+    var step = STEPS[currentStep];
+    addMsg(val, 'usr');
+    data[step.key] = val;
+    input.value = '';
+    inputRow.style.display = 'none';
+    currentStep++;
+    setTimeout(function(){ nextStep(); }, 300);
+  }
+
+  sendBtn.addEventListener('click', handleText);
+  input.addEventListener('keydown', function(e){ if(e.key === 'Enter') handleText(); });
+
+  function nextStep(){
+    if(currentStep < STEPS.length){
+      showStep(STEPS[currentStep]);
+    } else {
+      showFinal();
+    }
+  }
+
+  function showFinal(){
+    showTyping(function(){
+      addMsg('¡Listo! Esto es lo que registré:', 'bot');
+
+      var summary =
+        'Material: ' + data.material + '\n' +
+        'Especificaciones: ' + data.specs + '\n' +
+        'Cantidad: ' + data.cantidad + '\n' +
+        'Urgencia: ' + data.urgencia + '\n' +
+        'Nombre: ' + data.nombre + '\n' +
+        'Teléfono: ' + data.telefono;
+
+      var sumDiv = document.createElement('div');
+      sumDiv.className = 'cb-msg bot';
+      var bub = document.createElement('div');
+      bub.className = 'cb-bubble';
+      bub.style.whiteSpace = 'pre-line';
+      bub.style.fontSize = '.75rem';
+      bub.textContent = summary;
+      sumDiv.appendChild(bub);
+      msgs.appendChild(sumDiv);
+
+      showTyping(function(){
+        addMsg('¿Cómo quieres enviar tu solicitud?', 'bot');
+
+        /* Action buttons */
+        var actDiv = document.createElement('div');
+        actDiv.className = 'cb-msg bot';
+        var acts = document.createElement('div');
+        acts.className = 'cb-actions';
+
+        /* Formspree button */
+        var btnForm = document.createElement('button');
+        btnForm.className = 'btn btn-gold';
+        btnForm.textContent = 'Enviar por correo';
+        btnForm.addEventListener('click', function(){
+          btnForm.disabled = true;
+          btnForm.textContent = 'Enviando...';
+          fetch('https://formspree.io/f/mykvryny', {
+            method: 'POST',
+            headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              nombre:   data.nombre,
+              telefono: data.telefono,
+              material: data.material,
+              mensaje:  'Especificaciones: ' + data.specs + ' | Cantidad: ' + data.cantidad + ' | Urgencia: ' + data.urgencia
+            })
+          })
+          .then(function(r){
+            if(r.ok){
+              acts.innerHTML = '';
+              addMsg('¡Solicitud enviada! Te contactamos en menos de 2 horas. 👍', 'bot');
+            } else {
+              btnForm.textContent = 'Error — intenta de nuevo';
+              btnForm.disabled = false;
+            }
+          })
+          .catch(function(){
+            btnForm.textContent = 'Error — intenta de nuevo';
+            btnForm.disabled = false;
+          });
+        });
+
+        /* WhatsApp button */
+        var btnWa = document.createElement('a');
+        btnWa.className = 'btn btn-wa';
+        btnWa.innerHTML = '<svg class="ico-wa" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Continuar por WhatsApp';
+        var waMsg = 'Hola, quiero cotizar:\n' +
+          'Material: ' + data.material + '\n' +
+          'Especificaciones: ' + data.specs + '\n' +
+          'Cantidad: ' + data.cantidad + '\n' +
+          'Urgencia: ' + data.urgencia + '\n' +
+          'Nombre: ' + data.nombre + '\n' +
+          'Tel: ' + data.telefono;
+        btnWa.href = 'https://wa.me/528131113850?text=' + encodeURIComponent(waMsg);
+        btnWa.target = '_blank';
+        btnWa.rel = 'noopener';
+
+        acts.appendChild(btnForm);
+        acts.appendChild(btnWa);
+        actDiv.appendChild(acts);
+        msgs.appendChild(actDiv);
+        scrollBottom();
+      });
+    });
+  }
+
+  function startFlow(){
+    currentStep = 0;
+    data = {};
+    showStep(STEPS[0]);
+  }
+
+})();
+</script>
+</body>
+</html>
