@@ -1956,9 +1956,16 @@
           href="catalogo-descargar.pdf"
           target="_blank"
           rel="noopener"
-          onclick="closeNav()"
-          >Descargar catálogo PDF</a
+          onclick="
+            gtag('event', 'catalog_download', {
+              event_category: 'Catalogo',
+              event_label: 'Descarga PDF',
+            });
+            closeNav();
+          "
         >
+          Descargar catálogo PDF
+        </a>
       </nav>
     </header>
 
